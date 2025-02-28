@@ -9,10 +9,12 @@ const CustomHook = () => {
   const [catDetails, setCatDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   
+  // sacar el id del gato
   const { data: catImageData, loading: initialLoading } = useFetch({
     url: `https://api.thecatapi.com/v1/images/search?has_breeds=1&limit=1&page=${counter}`
   });
 
+  // con el id del gato sacar la info de la raza e imagen
   useEffect(() => {
     const fetchCatDetails = async () => {
       if (catImageData && catImageData[0] && catImageData[0].id) {
@@ -34,6 +36,7 @@ const CustomHook = () => {
     fetchCatDetails();
   }, [catImageData]);
 
+  // validar si existe el gato
   const hasValidBreed = catDetails && catDetails.breeds && catDetails.breeds.length > 0;
   
   const loading = initialLoading || isLoading;
@@ -57,8 +60,8 @@ const CustomHook = () => {
       )}
       
       <div className="d-flex justify-content-center mt-4 gap-2">
-        <button className='btn btn-secondary' onClick={() => decrement(1)} disabled={loading || counter <= 1}>Previous Cat</button>
-        <button className='btn btn-primary' onClick={() => increment(1)} disabled={loading}>Next Cat</button>
+        <button className='btn btn-secondary' onClick={() => decrement(1)} disabled={loading || counter <= 1}>Gato anterior</button>
+        <button className='btn btn-primary' onClick={() => increment(1)} disabled={loading}>Siguiente gato</button>
       </div>
     </div>
   )

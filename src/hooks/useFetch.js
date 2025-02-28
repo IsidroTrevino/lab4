@@ -10,6 +10,7 @@ export const useFetch = ({url}) => {
         }
     );
 
+    // usar async await para hacer el fetch
     const fetchData = async () => {
         setData({...data, loading: true});
         try {
